@@ -1,7 +1,11 @@
 <div>Group {{@letter}}</div>
 
 <ul>
-  {{#each teamNames key="@index" as |name|}}
-    <li>{{name}}</li>
+  {{#each teamNames key="@index" as |name index|}}
+    {{#if name}}
+      <li>{{name}}</li>
+    {{else}}
+      <li><span onclick={{action draw index}} class="drawSpot">Click me to draw!</span></li>
+    {{/if}}
   {{/each}}
 </ul>

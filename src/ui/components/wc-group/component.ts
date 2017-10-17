@@ -15,4 +15,11 @@ export default class WcGroup extends Component {
   get teamNames() {
     return this.teams.map( t => t && t.name );
   }
+
+  draw(position) {
+    let newTeams = this.teams.slice();
+    newTeams[position] = { name: 'Uruguay' };
+
+    this.teams = newTeams;
+  }
 };
