@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
+import Pots from './../../../utils/pots';
 
 export default class WorldCupDraw extends Component {
-  get groupA() {
-    return { teams: ['Argentina', 'Italia', 'Panama', 'Corea del Sur'] };
-  }
+  pots = { ...Pots };
+  rusia = this.pots[0].shift();
 }
