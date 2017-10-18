@@ -1,18 +1,14 @@
 import Component, { tracked } from '@glimmer/component';
-import Pots from './../../../utils/pots';
+import getDrawPots from './../../../utils/pots';
 
 export default class WorldCupDraw extends Component {
-  pots = Pots.slice();
+  pots = [];
   @tracked groups = {};
 
   constructor(options) {
     super(options);
     
-    const rusia = this.pots[0].shift();
-    this.groups = {
-      'A': [rusia, null, null, null],
-      'B': [null, null, null, null]
-    };
+    this.resetDraw();
   }
 
   drawTeam(groupLetter: string, potIndex: number) {
@@ -27,5 +23,15 @@ export default class WorldCupDraw extends Component {
 
     // Reassign to force component updates
     this.groups = {...this.groups, [groupLetter]: groupToUpdate};
+  }
+
+  resetDraw() {
+    this.pots = getDrawPots();
+
+    const rusia = this.pots[0].shift();
+    this.groups = {
+      'A': [rusia, null, null, null],
+      'B': [null, null, null, null]
+    };
   }
 }

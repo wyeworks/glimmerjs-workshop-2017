@@ -3,4 +3,5 @@
   {{#each groups key="@key" as |group letter|}}
     <wc-group @letter={{letter}} @teams={{group}} @drawTeam={{action drawTeam}} />
   {{/each}}
+  <button onclick={{action resetDraw}}>Reset</button>
 </div>
