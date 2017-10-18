@@ -13,10 +13,10 @@ export default class WorldCupDraw extends Component {
 
   drawTeam(groupLetter: string, potIndex: number) {
     const pot = this.pots[potIndex];
-    const randomIndex = Math.floor(Math.random() * pot.length);
-    const team = pot[randomIndex];
-    
-    pot.splice(randomIndex, 1);
+    const availableTeams = pot.filter(t => t.picked !== true);
+    const randomIndex = Math.floor(Math.random() * availableTeams.length);
+    const team = availableTeams[randomIndex];
+    team.picked = true;
 
     const groupToUpdate = this.groups[groupLetter];
     groupToUpdate[potIndex] = team;

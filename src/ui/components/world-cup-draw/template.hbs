@@ -1,5 +1,14 @@
 <div>
   <h1>Russia 2018 World Cup Draw</h1>
+  <div class="group-container">
+    {{#each pots key="@index" as |pot index|}}
+      <div class="group-item">
+        <wc-pot @number={{index}} @teams={{pot}} />
+      </div>
+    {{/each}}
+  </div>
+</div>
+<div>
   <div class="group-container" width={{@width}}>
     {{#each groups key="@key" as |group letter|}}
       <div class="group-item">
