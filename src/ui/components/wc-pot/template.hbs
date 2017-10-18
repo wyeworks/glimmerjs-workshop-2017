@@ -1,0 +1,11 @@
+<div>Pot {{@number}}</div>
+
+<ul class="teams">
+  {{#each @teams key="@index" as |team|}}
+    {{#if team.picked}}
+      <li class="team-picked">{{team.name}}</li>
+    {{else}}
+      <li>{{team.name}}</li>
+    {{/if}}
+  {{/each}}
+</ul>

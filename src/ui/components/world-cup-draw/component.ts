@@ -2,7 +2,7 @@ import Component, { tracked } from '@glimmer/component';
 import getDrawPots from './../../../utils/pots';
 
 export default class WorldCupDraw extends Component {
-  pots = [];
+  @tracked pots = [];
   @tracked groups = {};
 
   constructor(options) {
@@ -13,12 +13,17 @@ export default class WorldCupDraw extends Component {
 
   drawTeam(groupLetter: string, potIndex: number) {
     const pot = this.pots[potIndex];
-    const availableTeams = pot.filter(t => t.picked !== true);
+    const groupToUpdate = this.groups[groupLetter];
+
+    const conferedationsInGroup = groupToUpdate.map(t => t.confederation);
+    let availableTeams = pot
+      .filter(t => t.picked !== true)
+      .filter(t => t.confederation === 'UEFA' || !(conferedationsInGroup.includes(t.confederation)));
+
     const randomIndex = Math.floor(Math.random() * availableTeams.length);
     const team = availableTeams[randomIndex];
     team.picked = true;
 
-    const groupToUpdate = this.groups[groupLetter];
     groupToUpdate[potIndex] = team;
 
     // Reassign to force component updates
@@ -27,6 +32,7 @@ export default class WorldCupDraw extends Component {
 
   resetDraw() {
     this.pots = getDrawPots();
+    this.groups = {};
 
     for (var letter = 'A'; letter <= 'H'; letter = this._incrementLetter(letter)) {
       this.groups[letter] = new Array(4);
