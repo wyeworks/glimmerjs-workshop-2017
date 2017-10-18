@@ -28,16 +28,15 @@ export default class WorldCupDraw extends Component {
   resetDraw() {
     this.pots = getDrawPots();
 
+    for (var letter = 'A'; letter <= 'H'; letter = this._incrementLetter(letter)) {
+      this.groups[letter] = new Array(4);
+    }
+
     const rusia = this.pots[0].shift();
-    this.groups = {
-      'A': [rusia, null, null, null],
-      'B': [null, null, null, null],
-      'C': [null, null, null, null],
-      'D': [null, null, null, null],
-      'E': [null, null, null, null],
-      'F': [null, null, null, null],
-      'G': [null, null, null, null],
-      'H': [null, null, null, null]
-    };
+    this.groups['A'][0] = rusia;
+  }
+
+  _incrementLetter(letter: string) {
+    return String.fromCharCode(letter.charCodeAt(0) + 1)
   }
 }
