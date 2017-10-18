@@ -31,7 +31,13 @@ export default class WorldCupDraw extends Component {
     const rusia = this.pots[0].shift();
     this.groups = {
       'A': [rusia, null, null, null],
-      'B': [null, null, null, null]
+      'B': [null, null, null, null],
+      'C': [null, null, null, null],
+      'D': [null, null, null, null],
+      'E': [null, null, null, null],
+      'F': [null, null, null, null],
+      'G': [null, null, null, null],
+      'H': [null, null, null, null]
     };
   }
 }

@@ -1,6 +1,6 @@
 <div>
   <h1>Russia 2018 World Cup Draw</h1>
-  <div class="group-container">
+  <div class="group-container" width={{@width}}>
     {{#each groups key="@key" as |group letter|}}
       <div class="group-item">
         <wc-group @letter={{letter}} @teams={{group}} @drawTeam={{action drawTeam}} />
