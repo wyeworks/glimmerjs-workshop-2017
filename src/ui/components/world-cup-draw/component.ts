@@ -15,16 +15,6 @@ export default class WorldCupDraw extends Component {
     };
   }
 
-  @tracked('groups')
-  get groupA() {
-    return this.groups['A'];
-  };
-
-  @tracked('groups')
-  get groupB() {
-    return this.groups['B'];
-  };
-
   drawTeam(groupLetter: string, potIndex: number) {
     const pot = this.pots[potIndex];
     const randomIndex = Math.floor(Math.random() * pot.length);
@@ -32,11 +22,10 @@ export default class WorldCupDraw extends Component {
     
     pot.splice(randomIndex, 1);
 
-    let updatedGroup = {}
-    updatedGroup[groupLetter] = this.groups[groupLetter];
-    updatedGroup[groupLetter][potIndex] = team;
+    const groupToUpdate = this.groups[groupLetter];
+    groupToUpdate[potIndex] = team;
 
     // Reassign to force component updates
-    this.groups = {...this.groups, ...updatedGroup}
+    this.groups = {...this.groups, [groupLetter]: groupToUpdate};
   }
 }
