@@ -1,5 +1,16 @@
-import Component from '@glimmer/component';
+import Component, { tracked } from '@glimmer/component';
 
 export default class WcPot extends Component {
-  potTitle = `Pot ${this.args.number + 1}`;
+  @tracked drawn:boolean = false;
+  potTitle:string = `Pot ${this.args.number + 1}`;
+
+  @tracked('drawn')
+  get containerClass() {
+    return this.drawn ? 'drawn' : '';
+  }
+
+  drawPot() {
+    this.drawn = true;
+    this.args.drawPot();
+  }
 };
