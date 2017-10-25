@@ -12,11 +12,24 @@ export default class WorldCupDraw extends Component {
   }
 
   drawPot(potIndex: number) {
-    let initialLetter = potIndex === 0 ? 'B' : 'A';
+    const pot = this.pots[potIndex].filter(t => t.picked !== true);
+    pot.sort(this._sortTeamsByConfederation);
+    
+    pot.forEach(team => {
+      const availableGroups = this._availableGroupsForTeam(team, potIndex);
 
-    for (var letter = initialLetter; letter <= 'H'; letter = this._incrementLetter(letter)) {
-      this._drawTeam(letter, potIndex);
-    }
+      if (availableGroups.length > 0) {
+        const randomIndex = Math.floor(Math.random() * availableGroups.length);
+        const group = availableGroups[randomIndex];
+        
+        team.picked = true;
+        group[potIndex] = team;
+    
+        // Reassign to force component updates
+        const letter = this._groupLetter(group);
+        this.groups = {...this.groups, [letter]: group};
+      }
+    });
   }
 
   resetDraw() {
@@ -35,22 +48,34 @@ export default class WorldCupDraw extends Component {
     return String.fromCharCode(letter.charCodeAt(0) + 1)
   }
 
-  _drawTeam(groupLetter: string, potIndex: number) {
-    const pot = this.pots[potIndex];
-    const groupToUpdate = this.groups[groupLetter];
+  _sortTeamsByConfederation(t1, t2) {
+    if (t1.confederation === t2.confederation) {
+      return 0;
+    } else {
+      return t1.confederation === 'UEFA' ? 1 : 0;
+    }
+  }
 
-    const conferedationsInGroup = groupToUpdate.map(t => t.confederation);
-    let availableTeams = pot
-      .filter(t => t.picked !== true)
-      .filter(t => t.confederation === 'UEFA' || !(conferedationsInGroup.includes(t.confederation)));
+  _groupsList() {
+    return Object.keys(this.groups).map((letter) => {
+      return this.groups[letter];
+    });
+  }
 
-    const randomIndex = Math.floor(Math.random() * availableTeams.length);
-    const team = availableTeams[randomIndex];
-    team.picked = true;
+  _availableGroupsForTeam(team, potIndex) {
+    return this._groupsList().filter((g) => {
+      if (g[potIndex] !== undefined) {
+        return false;
+      } else if (team.confederation === 'UEFA') {
+        return true;
+      } else {
+        const conferedationsInGroup = g.map(t => t.confederation);
+        return !conferedationsInGroup.includes(team.confederation);
+      }
+    });
+  }
 
-    groupToUpdate[potIndex] = team;
-
-    // Reassign to force component updates
-    this.groups = {...this.groups, [groupLetter]: groupToUpdate};
+  _groupLetter(group) {
+    return Object.keys(this.groups).find(key => this.groups[key] === group)
   }
 }
