@@ -11,23 +11,12 @@ export default class WorldCupDraw extends Component {
     this.resetDraw();
   }
 
-  drawTeam(groupLetter: string, potIndex: number) {
-    const pot = this.pots[potIndex];
-    const groupToUpdate = this.groups[groupLetter];
+  drawPot(potIndex: number) {
+    let initialLetter = potIndex === 0 ? 'B' : 'A';
 
-    const conferedationsInGroup = groupToUpdate.map(t => t.confederation);
-    let availableTeams = pot
-      .filter(t => t.picked !== true)
-      .filter(t => t.confederation === 'UEFA' || !(conferedationsInGroup.includes(t.confederation)));
-
-    const randomIndex = Math.floor(Math.random() * availableTeams.length);
-    const team = availableTeams[randomIndex];
-    team.picked = true;
-
-    groupToUpdate[potIndex] = team;
-
-    // Reassign to force component updates
-    this.groups = {...this.groups, [groupLetter]: groupToUpdate};
+    for (var letter = initialLetter; letter <= 'H'; letter = this._incrementLetter(letter)) {
+      this._drawTeam(letter, potIndex);
+    }
   }
 
   resetDraw() {
@@ -44,5 +33,24 @@ export default class WorldCupDraw extends Component {
 
   _incrementLetter(letter: string) {
     return String.fromCharCode(letter.charCodeAt(0) + 1)
+  }
+
+  _drawTeam(groupLetter: string, potIndex: number) {
+    const pot = this.pots[potIndex];
+    const groupToUpdate = this.groups[groupLetter];
+
+    const conferedationsInGroup = groupToUpdate.map(t => t.confederation);
+    let availableTeams = pot
+      .filter(t => t.picked !== true)
+      .filter(t => t.confederation === 'UEFA' || !(conferedationsInGroup.includes(t.confederation)));
+
+    const randomIndex = Math.floor(Math.random() * availableTeams.length);
+    const team = availableTeams[randomIndex];
+    team.picked = true;
+
+    groupToUpdate[potIndex] = team;
+
+    // Reassign to force component updates
+    this.groups = {...this.groups, [groupLetter]: groupToUpdate};
   }
 }
