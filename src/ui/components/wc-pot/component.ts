@@ -5,7 +5,7 @@ export default class WcPot extends Component {
   potTitle:string = `Pot ${this.args.number + 1}`;
 
   @tracked('drawn')
-  get containerClass() {
+  get drawnClass() {
     return this.drawn ? 'drawn' : '';
   }
 

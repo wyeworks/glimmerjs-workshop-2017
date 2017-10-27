@@ -1,8 +1,9 @@
-<div>
+<div class="main-container">
   <h1>Russia 2018 World Cup Draw</h1>
-  <div class="group-container">
+  
+  <div class="pot-container">
     {{#each potsToRender key="key" as |pot index|}}
-      <div class="group-item">
+      <div class="pot-item">
         <wc-pot
           @number={{index}}
           @teams={{pot.teams}}
@@ -12,14 +13,15 @@
       </div>
     {{/each}}
   </div>
-</div>
-<div>
-  <div class="group-container" width={{@width}}>
-    {{#each groups key="@key" as |group letter|}}
-      <div class="group-item">
-        <wc-group @letter={{letter}} @teams={{group}} />
-      </div>
-    {{/each}}
+
+  <div>
+    <div class="group-container" width={{@width}}>
+      {{#each groups key="@key" as |group letter|}}
+        <div class="group-item">
+          <wc-group @letter={{letter}} @teams={{group}} />
+        </div>
+      {{/each}}
+    </div>
+    <button onclick={{action resetDraw}}>Reset</button>
   </div>
-  <button onclick={{action resetDraw}}>Reset</button>
 </div>

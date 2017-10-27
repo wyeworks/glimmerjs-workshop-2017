@@ -1,13 +1,15 @@
-<div class={{containerClass}}>
-  <div>{{potTitle}}</div>
+<div class="pot-title {{drawnClass}}">{{potTitle}}</div>
 
-  <ul class="teams">
+<div class="pot-teams {{drawnClass}}">
+  <ul>
     {{#each @teams key="@index" as |team|}}
       <li>{{team.name}}</li>
     {{/each}}
   </ul>
-
-  {{#if @showDrawButton}}
-    <button onclick={{action drawPot}} disabled={{drawn}}>Draw</button>
-  {{/if}}
 </div>
+
+{{#if @showDrawButton}}
+  <div class="pot-draw-button">
+    <button onclick={{action drawPot}} disabled={{drawn}}>Draw</button>
+  </div>
+{{/if}}

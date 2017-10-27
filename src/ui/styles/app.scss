@@ -1,16 +1,70 @@
-h1 {
-  color: #444;
+@font-face {
+  font-family: 'World_Cup_2018';
+  src: url('fonts/Dusha_-_FIFA_World_Cup_2018.woff2') format('woff2'), /* Super Modern Browsers */
+  url('fonts/Dusha_-_FIFA_World_Cup_2018.woff') format('woff'), /* Pretty Modern Browsers */
+  url('fonts/Dusha_-_FIFA_World_Cup_2018.ttf')  format('truetype'), /* Safari, Android, iOS */
+}
+
+.main-container {
+  font-family: 'World_Cup_2018', 'Arial', sans-serif;
+  background-image: url('images/rusia-background.png');
+  
+  padding: 10px;
+  margin: auto;
+  max-width: 1400px;
+  
+  button {
+    font-family: 'World_Cup_2018', 'Arial', sans-serif;
+
+    box-sizing: border-box;
+    background-color: rgb(216, 221, 234);
+    border: 2px solid rebeccapurple;
+    border-radius: 0.6em;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    margin: 10px;
+    padding: 0.6rem 3rem;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: white;
+    
+    &:hover,
+    &:focus {
+      color: black;
+      outline: 0;
+    }
+
+    background: {
+      image: linear-gradient(45deg, rebeccapurple 0%, transparent 50%);
+      position: 0;
+      size: 450%;
+    }
+    transition: background 300ms ease-in-out;
+    
+    &:hover {
+      background-position: 30%;
+    }
+    &:disabled {
+      color: silver;
+      border-color: silver;
+      outline: 0;
+      background-position: 100%;
+    }
+  }
+  
+  h1 {
+    color: #444;
+    text-align: center;
+  }
 }
 
 .draw-spot {
   background-color: cornflowerblue;
   border: solid 1px;
   cursor: pointer;
-}
-
-.teams {
-  padding: 0px;
-  list-style: none;
 }
 
 .group-container {
@@ -25,7 +79,63 @@ h1 {
   flex-grow: 1;
   flex-shrink: 0;
   flex-basis: 20%;
+  
+  ul {
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+    padding: 0px;
+    list-style: none;
+  }
+}
 
+// POTS
+
+.pot-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.pot-item {
+  padding: 10px;
+  margin: 10px;
+  
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 20%;
+  
+  .pot-title {
+    text-align: center;
+    
+    border:solid 2px #41403E;
+    border-radius: 15px 15px 100px 100px/100px 100px 200px 200px;
+    
+    background-color: rebeccapurple;
+    color: white;
+    z-index: 1;
+    position: relative;
+  }
+  
+  .pot-teams {
+    border:solid 2px #41403E;
+    border-radius: 15px 15px 100px 100px/100px 100px 200px 200px;
+    
+    min-height: 200px;
+    position: relative;
+    margin-top: -5px;
+    
+    ul {
+      font-size: 1.2rem;
+      line-height: 1.4rem;
+      margin: 10px 60px;
+      padding: 0px;
+      list-style: none;
+    }
+  }
+  
+  .pot-draw-button {
+    text-align: center;
+  }
+  
   .drawn {
     color: silver;
   }
