@@ -3,6 +3,7 @@ import getDrawPots from './../../../utils/pots';
 
 export default class WorldCupDraw extends Component {
   @tracked pots = [];
+  @tracked nextPotToDraw = 0;
   @tracked groups = {};
 
   constructor(options) {
@@ -12,10 +13,10 @@ export default class WorldCupDraw extends Component {
   }
 
   drawPot(potIndex: number) {
-    const pot = this.pots[potIndex].filter(t => t.picked !== true);
-    pot.sort(this._sortTeamsByConfederation);
+    const potTeams = this.pots[potIndex].filter(t => t.picked !== true);
+    potTeams.sort(this._sortTeamsByConfederation);
     
-    pot.forEach(team => {
+    potTeams.forEach(team => {
       const availableGroups = this._availableGroupsForTeam(team, potIndex);
 
       if (availableGroups.length > 0) {
@@ -30,10 +31,19 @@ export default class WorldCupDraw extends Component {
         this.groups = {...this.groups, [letter]: group};
       }
     });
+
+    const nextGroupIndex = Number(potIndex) + 1;
+
+    if (nextGroupIndex <= 3) {
+      this.nextPotToDraw = nextGroupIndex;
+    } else {
+      this.nextPotToDraw = -1;
+    }
   }
 
   resetDraw() {
     this.pots = getDrawPots();
+    this.nextPotToDraw = 0;
     this.groups = {};
 
     for (var letter = 'A'; letter <= 'H'; letter = this._incrementLetter(letter)) {
@@ -42,6 +52,13 @@ export default class WorldCupDraw extends Component {
 
     const rusia = this.pots[0].shift();
     this.groups['A'][0] = rusia;
+  }
+
+  @tracked('pots', 'nextPotToDraw')
+  get potsToRender() {
+    return this.pots.map((teams, index) => {
+      return { teams, showDrawButton: index === this.nextPotToDraw }
+    });
   }
 
   _incrementLetter(letter: string) {

@@ -7,5 +7,7 @@
     {{/each}}
   </ul>
 
-  <button onclick={{action drawPot}} disabled={{drawn}}>Draw</button>
+  {{#if @showDrawButton}}
+    <button onclick={{action drawPot}} disabled={{drawn}}>Draw</button>
+  {{/if}}
 </div>
