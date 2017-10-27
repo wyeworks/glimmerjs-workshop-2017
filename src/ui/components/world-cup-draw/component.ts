@@ -1,10 +1,13 @@
 import Component, { tracked } from '@glimmer/component';
 import getDrawPots from './../../../utils/pots';
 
+const HIGHLIGHT_TEAM = 'Uruguay';
+
 export default class WorldCupDraw extends Component {
   @tracked pots = [];
   @tracked nextPotToDraw = 0;
   @tracked groups = {};
+  @tracked groupToHighlight = null;
 
   resetAt = Date.now();
 
@@ -31,6 +34,10 @@ export default class WorldCupDraw extends Component {
         // Reassign to force component updates
         const letter = this._groupLetter(group);
         this.groups = {...this.groups, [letter]: group};
+
+        if (team.name === HIGHLIGHT_TEAM) {
+          this.groupToHighlight = letter;
+        }
       }
     });
 
@@ -41,6 +48,7 @@ export default class WorldCupDraw extends Component {
     this.pots = getDrawPots();
     this.nextPotToDraw = 0;
     this.groups = {};
+    this.groupToHighlight = null;
 
     for (var letter = 'A'; letter <= 'H'; letter = this._incrementLetter(letter)) {
       this.groups[letter] = new Array(4);
@@ -50,6 +58,7 @@ export default class WorldCupDraw extends Component {
     this.groups['A'][0] = rusia;
 
     this.resetAt = Date.now();
+    
   }
 
   @tracked('pots', 'nextPotToDraw')
@@ -58,7 +67,8 @@ export default class WorldCupDraw extends Component {
       return {
         teams,
         showDrawButton: index <= this.nextPotToDraw,
-        key: `${this.resetAt}-${index}` }
+        key: `${this.resetAt}-${index}`
+      }
     });
   }
 

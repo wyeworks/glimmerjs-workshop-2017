@@ -59,84 +59,102 @@
     color: #444;
     text-align: center;
   }
-}
-
-.draw-spot {
-  background-color: cornflowerblue;
-  border: solid 1px;
-  cursor: pointer;
-}
-
-.group-container {
-  display: flex;
-  flex-flow: row wrap;
-}
-
-.group-item {
-  padding: 10px;
-  margin: 10px;
-  border: 1px solid silver;
-  flex-grow: 1;
-  flex-shrink: 0;
-  flex-basis: 20%;
-  
-  ul {
-    font-size: 1.2rem;
-    line-height: 1.4rem;
-    padding: 0px;
-    list-style: none;
-  }
-}
-
-// POTS
-
-.pot-container {
-  display: flex;
-  flex-flow: row wrap;
-}
-
-.pot-item {
-  padding: 10px;
-  margin: 10px;
-  
-  flex-grow: 1;
-  flex-shrink: 0;
-  flex-basis: 20%;
-  
-  .pot-title {
+   
+  .draw-button-container {
     text-align: center;
-    
-    border:solid 2px #41403E;
-    border-radius: 15px 15px 100px 100px/100px 100px 200px 200px;
-    
-    background-color: rebeccapurple;
-    color: white;
-    z-index: 1;
-    position: relative;
+  }
+
+
+  .draw-spot {
+    background-color: cornflowerblue;
+    border: solid 1px;
+    cursor: pointer;
+  }
+
+  .group-container {
+    display: flex;
+    flex-flow: row wrap;
+
+    background-color: rgba(100, 150, 237, 0.4);
   }
   
-  .pot-teams {
-    border:solid 2px #41403E;
-    border-radius: 15px 15px 100px 100px/100px 100px 200px 200px;
-    
-    min-height: 200px;
-    position: relative;
-    margin-top: -5px;
+  .group-item {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid black;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 20%;
+
+    &.highlight {
+      background-color: rgba(240, 248, 255, 0.5);
+    }
+
+    .group-title {
+      border-bottom: solid 1px;
+      margin-left: -10px;
+      margin-right: -10px;
+      padding-bottom: 10px;
+
+      > span {
+        text-transform: uppercase;
+        margin-left: 10px;
+      }
+    }
     
     ul {
       font-size: 1.2rem;
       line-height: 1.4rem;
-      margin: 10px 60px;
       padding: 0px;
       list-style: none;
     }
   }
-  
-  .pot-draw-button {
-    text-align: center;
+
+
+  .pot-container {
+    display: flex;
+    flex-flow: row wrap;
   }
-  
-  .drawn {
-    color: silver;
+
+  .pot-item {
+    padding: 10px;
+    margin: 10px;
+    
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 20%;
+    
+    .pot-title {
+      text-align: center;
+      
+      border:solid 2px #41403E;
+      border-radius: 15px 15px 100px 100px/100px 100px 200px 200px;
+      
+      background-color: rebeccapurple;
+      color: white;
+      z-index: 1;
+      position: relative;
+    }
+    
+    .pot-teams {
+      border:solid 2px #41403E;
+      border-radius: 15px 15px 100px 100px/100px 100px 200px 200px;
+      
+      min-height: 200px;
+      position: relative;
+      margin-top: -5px;
+      
+      ul {
+        font-size: 1.2rem;
+        line-height: 1.4rem;
+        margin: 10px 60px;
+        padding: 0px;
+        list-style: none;
+      }
+    }
+    
+    .drawn {
+      color: silver;
+    }
   }
 }

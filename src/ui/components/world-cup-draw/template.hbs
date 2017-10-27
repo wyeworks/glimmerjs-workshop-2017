@@ -17,11 +17,13 @@
   <div>
     <div class="group-container" width={{@width}}>
       {{#each groups key="@key" as |group letter|}}
-        <div class="group-item">
+        <div class="group-item {{class-if-equals 'highlight' groupToHighlight letter}}">
           <wc-group @letter={{letter}} @teams={{group}} />
         </div>
       {{/each}}
     </div>
-    <button onclick={{action resetDraw}}>Reset</button>
+    <div class="draw-button-container">
+      <button onclick={{action resetDraw}}>Reset</button>
+    </div>
   </div>
 </div>

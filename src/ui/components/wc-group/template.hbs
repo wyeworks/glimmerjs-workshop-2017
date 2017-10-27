@@ -1,11 +1,11 @@
-<div>Group {{@letter}}</div>
+<div class="group-title"><span>Group {{@letter}}</span></div>
 
 <ul class="teams">
   {{#each @teams key="@index" as |team index|}}
     {{#if team}}
       <li>{{team.name}}</li>
     {{else}}
-      <li>-</li>
+      <li>&nbsp;</li>
     {{/if}}
   {{/each}}
 </ul>
