@@ -1,7 +1,7 @@
 <div>
   <h1>Russia 2018 World Cup Draw</h1>
   <div class="group-container">
-    {{#each potsToRender key="@index" as |pot index|}}
+    {{#each potsToRender key="key" as |pot index|}}
       <div class="group-item">
         <wc-pot
           @number={{index}}

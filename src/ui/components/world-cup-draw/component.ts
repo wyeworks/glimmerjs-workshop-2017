@@ -6,6 +6,8 @@ export default class WorldCupDraw extends Component {
   @tracked nextPotToDraw = 0;
   @tracked groups = {};
 
+  resetAt = Date.now();
+
   constructor(options) {
     super(options);
     
@@ -32,13 +34,7 @@ export default class WorldCupDraw extends Component {
       }
     });
 
-    const nextGroupIndex = Number(potIndex) + 1;
-
-    if (nextGroupIndex <= 3) {
-      this.nextPotToDraw = nextGroupIndex;
-    } else {
-      this.nextPotToDraw = -1;
-    }
+    this.nextPotToDraw = Number(potIndex) + 1;
   }
 
   resetDraw() {
@@ -52,12 +48,17 @@ export default class WorldCupDraw extends Component {
 
     const rusia = this.pots[0].shift();
     this.groups['A'][0] = rusia;
+
+    this.resetAt = Date.now();
   }
 
   @tracked('pots', 'nextPotToDraw')
   get potsToRender() {
     return this.pots.map((teams, index) => {
-      return { teams, showDrawButton: index === this.nextPotToDraw }
+      return {
+        teams,
+        showDrawButton: index <= this.nextPotToDraw,
+        key: `${this.resetAt}-${index}` }
     });
   }
 
