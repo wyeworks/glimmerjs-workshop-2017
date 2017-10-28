@@ -75,7 +75,7 @@
     display: flex;
     flex-flow: row wrap;
 
-    background-color: rgba(100, 150, 237, 0.4);
+    background-color: rgba(100, 150, 237, 0.8);
   }
   
   .group-item {
@@ -139,6 +139,7 @@
     .pot-teams {
       border:solid 2px #41403E;
       border-radius: 15px 15px 100px 100px/100px 100px 200px 200px;
+      background-color: rgba(240, 248, 255, 0.8);
       
       min-height: 200px;
       position: relative;
