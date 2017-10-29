@@ -186,6 +186,10 @@
   dependencies:
     "@glimmer/util" "^0.26.2"
 
+"@types/jquery@^3.2.15":
+  version "3.2.15"
+  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.2.15.tgz#3f620a9f5a0b296866f4bc729825226d0a35fba6"
+
 "@types/qunit@^2.0.31":
   version "2.0.31"
   resolved "https://registry.yarnpkg.com/@types/qunit/-/qunit-2.0.31.tgz#a53e2cf635262c8bf46a71a137d8c7970dde9562"
@@ -3358,6 +3362,10 @@ istextorbinary@2.1.0:
     binaryextensions "1 || 2"
     editions "^1.1.1"
     textextensions "1 || 2"
+
+jquery@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
 
 js-base64@^2.1.8:
   version "2.3.2"

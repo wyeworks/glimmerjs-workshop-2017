@@ -34,6 +34,8 @@
   },
   "private": true,
   "dependencies": {
-    "chokidar": "^1.7.0"
+    "@types/jquery": "^3.2.15",
+    "chokidar": "^1.7.0",
+    "jquery": "^3.2.1"
   }
 }
