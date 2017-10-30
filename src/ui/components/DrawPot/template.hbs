@@ -8,4 +8,6 @@
 
 <button onclick={{action draw}} disabled={{drawDone}}>Draw!</button>
 
-<p>The selected team is <strong>{{selectedTeam}}</strong></p>
+{{#if drawDone}}
+  <p>The selected team is <strong>{{selectedTeam}}</strong></p>
+{{/if}}
