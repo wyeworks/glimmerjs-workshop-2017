@@ -1,8 +1,10 @@
-import Component from '@glimmer/component';
+import Component, { tracked } from '@glimmer/component';
 
 export default class DrawPot extends Component {
+  @tracked selectedTeam: string
+
   draw() {
-    alert(`The selected team is: ${this._drawTeam()}`);
+    this.selectedTeam = this._drawTeam();
   }
 
   _drawTeam(): string {
