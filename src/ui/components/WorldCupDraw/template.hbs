@@ -3,7 +3,10 @@
 
   <div class="pot-container">
     <div class="pot-item">
-      <DrawPot @teams={{teams}} />
+      <DrawPot
+        @teams={{teams}}
+        @drawAction={{action drawTeamFromPot}}
+      />
     </div>
   </div>
 
