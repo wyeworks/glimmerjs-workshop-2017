@@ -7,6 +7,11 @@ export default class DrawPot extends Component {
     this.selectedTeam = this.drawTeam();
   }
 
+  @tracked('selectedTeam')
+  get drawDone(): boolean {
+    return !!this.selectedTeam;
+  }
+
   private drawTeam(): string {
     const teams: string[] = this.args.teams;
     const randomIndex = Math.floor(Math.random() * teams.length);
