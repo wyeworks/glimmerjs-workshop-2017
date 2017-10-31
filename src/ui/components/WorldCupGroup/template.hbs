@@ -3,7 +3,7 @@
 <ul class="teams">
   {{#each @teams key="@index" as |team|}}
     {{#if team}}
-      <li>{{team}}</li>
+      <li>{{team.name}}</li>
     {{else}}
       <li>&nbsp;</li>
     {{/if}}
