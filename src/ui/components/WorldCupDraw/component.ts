@@ -1,46 +1,25 @@
 import Component, { tracked } from '@glimmer/component';
 
-interface Team {
-  name: string,
-  drawn?: boolean
-}
+import {
+  Team,
+  Confederation,
+  getTeamsInPots,
+  getHostTeam,
+  drawPot
+} from '../../../utils/draw';
 
 export default class WorldCupDraw extends Component {
-  teams: Team[] = [
-    { name: 'Alemania' },
-    { name: 'Polonia' },
-    { name: 'Portugal' },
-    { name: 'Francia' },
-    { name: 'Bélgica' },
-    { name: 'Argentina' },
-    { name: 'Brasil' }
-  ]
+  teams: Team[] = getTeamsInPots()[0]
 
   @tracked groups: Team[][] = Array.from(Array(8), _ => Array(4))
 
   constructor(options) {
     super(options);
-
-    this.groups[0][0] = { name: 'Rusia', drawn: true };
+    this.groups[0][0] = getHostTeam();
   }
 
   drawPot(): void {
-    let groups: Team[][] = [...this.groups];
-
-    for (var groupIndex = 1; groupIndex < 8; groupIndex++) {
-      const selectedTeam = this._drawTeamFromPot();
-      groups[groupIndex] = [selectedTeam, ...this.groups[groupIndex].slice(1)];
-    }
-
+    const groups: Team[][] = drawPot(0, this.teams, this.groups);
     this.groups = [...groups];
-  }
-
-  _drawTeamFromPot(): Team {
-    const availableTeams: Team[] = this.teams.filter(t => !t.drawn);
-    const randomIndex = Math.floor(Math.random() * availableTeams.length);
-    const selectedTeam: Team = availableTeams[randomIndex];
-
-    selectedTeam.drawn = true;
-    return selectedTeam;
   }
 }
