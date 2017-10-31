@@ -11,8 +11,7 @@ import {
 } from '../../../utils/draw';
 
 export default class WorldCupDraw extends Component {
-  public teams: Pot = getTeamsInPots()[0];
-
+  public pots: Pot[] = getTeamsInPots();
   @tracked public groups: Group[] = Array.from(Array(8), (_) => Array(4));
 
   constructor(options) {
@@ -20,8 +19,8 @@ export default class WorldCupDraw extends Component {
     this.groups[0][0] = getHostTeam();
   }
 
-  public drawPot(): void {
-    const groups: Group[] = drawPot(0, this.teams, this.groups);
+  public drawPot(potIndex): void {
+    const groups: Group[] = drawPot(potIndex, this.pots[potIndex], this.groups);
 
     // Just replacing the root element does not work,
     // Creating a deep copy of the array of arrays

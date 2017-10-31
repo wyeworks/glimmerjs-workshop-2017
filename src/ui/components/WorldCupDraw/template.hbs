@@ -2,12 +2,14 @@
   <h1>Russia 2018 World Cup</h1>
 
   <div class="pot-container">
-    <div class="pot-item">
-      <DrawPot
-        @teams={{teams}}
-        @drawAction={{action drawPot}}
-      />
-    </div>
+    {{#each pots key="@index" as |teams index|}}
+      <div class="pot-item">
+        <DrawPot
+          @teams={{teams}}
+          @drawAction={{action drawPot index}}
+        />
+      </div>
+    {{/each}}
   </div>
 
   <div class="group-container">
