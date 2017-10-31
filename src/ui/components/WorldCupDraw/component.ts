@@ -1,46 +1,30 @@
 import Component, { tracked } from '@glimmer/component';
 
-interface ITeam {
-  name: string;
-  drawn?: boolean;
-}
+import {
+  Confederation,
+  drawPot,
+  getHostTeam,
+  getTeamsInPots,
+  Group,
+  ITeam,
+  Pot
+} from '../../../utils/draw';
 
 export default class WorldCupDraw extends Component {
-  public teams: ITeam[] = [
-    { name: 'Alemania' },
-    { name: 'Polonia' },
-    { name: 'Portugal' },
-    { name: 'Francia' },
-    { name: 'Bélgica' },
-    { name: 'Argentina' },
-    { name: 'Brasil' }
-  ];
+  public teams: Pot = getTeamsInPots()[0];
 
-  @tracked public groups: ITeam[][] = Array.from(Array(8), (_) => Array(4));
+  @tracked public groups: Group[] = Array.from(Array(8), (_) => Array(4));
 
   constructor(options) {
     super(options);
-
-    this.groups[0][0] = { name: 'Rusia', drawn: true };
+    this.groups[0][0] = getHostTeam();
   }
 
   public drawPot(): void {
-    let groups: ITeam[][] = [...this.groups];
+    const groups: Group[] = drawPot(0, this.teams, this.groups);
 
-    for (let groupIndex = 1; groupIndex < 8; groupIndex++) {
-      const selectedTeam = this.drawTeamFromPot();
-      groups[groupIndex] = [selectedTeam, ...this.groups[groupIndex].slice(1)];
-    }
-
-    this.groups = groups;
-  }
-
-  private drawTeamFromPot(): ITeam {
-    const availableTeams: ITeam[] = this.teams.filter((t) => !t.drawn);
-    const randomIndex = Math.floor(Math.random() * availableTeams.length);
-    const selectedTeam: ITeam = availableTeams[randomIndex];
-
-    selectedTeam.drawn = true;
-    return selectedTeam;
+    // Just replacing the root element does not work,
+    // Creating a deep copy of the array of arrays
+    this.groups = groups.map((g) => g.slice());
   }
 }
