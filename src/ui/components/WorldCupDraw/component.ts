@@ -36,8 +36,9 @@ export default class WorldCupDraw extends Component {
   }
 
   _drawTeamFromPot(): Team {
-    const randomIndex = Math.floor(Math.random() * this.teams.length);
-    const selectedTeam: Team = this.teams[randomIndex];
+    const availableTeams: Team[] = this.teams.filter(t => !t.drawn);
+    const randomIndex = Math.floor(Math.random() * availableTeams.length);
+    const selectedTeam: Team = availableTeams[randomIndex];
 
     selectedTeam.drawn = true;
     return selectedTeam;
