@@ -18,10 +18,16 @@ export default class WorldCupDraw extends Component {
 
   @tracked public groups: ITeam[][] = Array.from(Array(8), (_) => Array(4));
 
-  public drawPot(): void {
-    let groups: ITeam[][] = [];
+  constructor(options) {
+    super(options);
 
-    for (let groupIndex = 0; groupIndex < 7; groupIndex++) {
+    this.groups[0][0] = { name: 'Rusia', drawn: true };
+  }
+
+  public drawPot(): void {
+    let groups: ITeam[][] = [...this.groups];
+
+    for (let groupIndex = 1; groupIndex < 8; groupIndex++) {
       const selectedTeam = this.drawTeamFromPot();
       groups[groupIndex] = [selectedTeam, ...this.groups[groupIndex].slice(1)];
     }
