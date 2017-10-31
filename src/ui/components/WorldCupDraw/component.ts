@@ -16,13 +16,24 @@ export default class WorldCupDraw extends Component {
     { name: 'Brasil' }
   ]
 
-  @tracked group: Team[] = Array(4)
+  @tracked groups: Team[][] = Array.from(Array(8), _ => Array(4))
 
-  drawTeamFromPot(): void {
+  drawPot(): void {
+    let groups: Team[][] = [];
+
+    for (var groupIndex = 0; groupIndex <= 7; groupIndex++) {
+      const selectedTeam = this._drawTeamFromPot();
+      groups[groupIndex] = [selectedTeam, ...this.groups[groupIndex].slice(1)];
+    }
+
+    this.groups = [...groups];
+  }
+
+  _drawTeamFromPot(): Team {
     const randomIndex = Math.floor(Math.random() * this.teams.length);
     const selectedTeam: Team = this.teams[randomIndex];
 
     selectedTeam.drawn = true;
-    this.group = [selectedTeam, ...this.group.slice(1)];
+    return selectedTeam;
   }
 }
