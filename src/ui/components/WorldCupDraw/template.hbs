@@ -5,14 +5,16 @@
     <div class="pot-item">
       <DrawPot
         @teams={{teams}}
-        @drawAction={{action drawTeamFromPot}}
+        @drawAction={{action drawPot}}
       />
     </div>
   </div>
 
   <div class="group-container">
-    <div class="group-item">
-      <WorldCupGroup @teams={{group}} />
-    </div>
+    {{#each groups key="@index" as |group|}}
+      <div class="group-item">
+        <WorldCupGroup @teams={{group}} />
+      </div>
+    {{/each}}
   </div>
 </div>
