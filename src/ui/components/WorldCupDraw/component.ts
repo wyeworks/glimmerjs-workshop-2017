@@ -9,8 +9,7 @@ import {
 } from '../../../utils/draw';
 
 export default class WorldCupDraw extends Component {
-  teams: Team[] = getTeamsInPots()[0]
-
+  pots: Team[][] = getTeamsInPots()
   @tracked groups: Team[][] = Array.from(Array(8), _ => Array(4))
 
   constructor(options) {
@@ -18,8 +17,8 @@ export default class WorldCupDraw extends Component {
     this.groups[0][0] = getHostTeam();
   }
 
-  drawPot(): void {
-    const groups: Team[][] = drawPot(0, this.teams, this.groups);
+  drawPot(potIndex): void {
+    const groups: Team[][] = drawPot(potIndex, this.pots[potIndex], this.groups);
     this.groups = [...groups];
   }
 }
