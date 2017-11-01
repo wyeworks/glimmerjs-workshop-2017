@@ -15,7 +15,7 @@
 
   <div class="group-container">
     {{#each groups key="@index" as |group|}}
-      <div class="group-item">
+      <div class="group-item {{render-if-equals 'highlight' group highlightedGroup}}">
         <WorldCupGroup @teams={{group}} />
       </div>
     {{/each}}

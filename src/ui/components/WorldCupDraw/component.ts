@@ -10,6 +10,8 @@ import {
   Pot
 } from '../../../utils/draw';
 
+const TEAM_TO_HIGHLIGHT: string = 'Uruguay';
+
 export default class WorldCupDraw extends Component {
   public pots: Pot[] = getTeamsInPots();
   @tracked public groups: Group[] = Array.from(Array(8), (_) => Array(4));
@@ -25,5 +27,11 @@ export default class WorldCupDraw extends Component {
     // Just replacing the root element does not work,
     // Creating a deep copy of the array of arrays
     this.groups = groups.map((g) => g.slice());
+  }
+
+  @tracked('groups')
+  get highlightedGroup(): Group {
+    const teamToHighlightFn = (t: ITeam) => t && t.name === TEAM_TO_HIGHLIGHT;
+    return this.groups.find((g) => g.some(teamToHighlightFn));
   }
 }
