@@ -8,6 +8,6 @@ module('Component: WorldCupDraw', function(hooks) {
 
   test('it renders', async function(assert) {
     await this.render(hbs`<WorldCupDraw />`);
-    assert.equal(this.containerElement.textContent, 'Welcome to Glimmer!\n');
+    assert.ok(this.containerElement.querySelector('div'));
   });
 });
