@@ -1,0 +1,13 @@
+<div class="pot-title">Pot 1</div>
+
+<div class="pot-teams">
+  <ul>
+    {{#each @teams key="@index" as |team|}}
+      <li>{{team.name}}</li>
+    {{/each}}
+  </ul>
+</div>
+
+<div class="draw-button-container">
+  <button onclick={{action draw}} disabled={{drawDone}}>Draw!</button>
+</div>

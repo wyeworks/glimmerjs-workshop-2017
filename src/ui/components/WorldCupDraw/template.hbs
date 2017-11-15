@@ -1,1 +1,22 @@
-<div><h1>Welcome to Glimmer!</h1></div>
+<div class="main-container">
+  <h1>Russia 2018 World Cup</h1>
+
+  <div class="pot-container">
+    {{#each pots key="@index" as |teams index|}}
+      <div class="pot-item">
+        <DrawPot
+          @teams={{teams}}
+          @drawAction={{action drawPot index}}
+        />
+      </div>
+    {{/each}}
+  </div>
+
+  <div class="group-container">
+    {{#each groups key="@index" as |group index|}}
+      <div class="group-item {{render-if-equals 'highlight' group highlightedGroup}}">
+        <WorldCupGroup @teams={{group}} @groupIndex={{index}} />
+      </div>
+    {{/each}}
+  </div>
+</div>
