@@ -18,5 +18,5 @@ module('Component: WorldCupDraw', function(hooks) {
 
     const groupItemElement = this.containerElement.querySelector('.group-item:nth-child(3) .group-title');
     assert.equal(groupItemElement.textContent, 'Group C');
-  })
+  });
 });
