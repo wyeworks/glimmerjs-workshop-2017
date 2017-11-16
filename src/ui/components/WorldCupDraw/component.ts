@@ -1,10 +1,10 @@
 import Component, { tracked } from '@glimmer/component';
 import {
-  Team,
   Confederation,
-  getTeamsInPots,
+  drawPot,
   getHostTeam,
-  drawPot
+  getTeamsInPots,
+  Team,
 } from '../../../utils/draw';
 
 const TEAM_TO_HIGHLIGHT: string = 'Uruguay';
