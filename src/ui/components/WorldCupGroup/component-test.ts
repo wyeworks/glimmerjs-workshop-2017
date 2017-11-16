@@ -11,7 +11,7 @@ module('Component: WorldCupGroup', function(hooks) {
 
     const titleElement = this.containerElement.querySelector('.group-title');
 
-    assert.equal(titleElement.textContent, "Group A");
+    assert.equal(titleElement.textContent, 'Group A');
   });
 
   test('it renders the group B', async function(assert) {
@@ -19,6 +19,6 @@ module('Component: WorldCupGroup', function(hooks) {
 
     const titleElement = this.containerElement.querySelector('.group-title');
 
-    assert.equal(titleElement.textContent, "Group B");
+    assert.equal(titleElement.textContent, 'Group B');
   });
 });
