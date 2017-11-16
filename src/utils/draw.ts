@@ -7,9 +7,9 @@ export enum Confederation {
 }
 
 export interface Team {
-  name: string,
-  confederation: Confederation,
-  drawn?: boolean
+  name: string;
+  confederation: Confederation;
+  drawn?: boolean;
 }
 
 function sortTeamsByConfederation(t1: Team, t2: Team): number {

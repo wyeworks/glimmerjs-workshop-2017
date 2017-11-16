@@ -10,9 +10,9 @@ import {
 const TEAM_TO_HIGHLIGHT: string = 'Uruguay';
 
 export default class WorldCupDraw extends Component {
-  pots: Team[][] = getTeamsInPots()
+  pots: Team[][] = getTeamsInPots();
 
-  @tracked groups: Team[][] = Array.from(Array(8), _ => Array(4))
+  @tracked groups: Team[][] = Array.from(Array(8), _ => Array(4));
 
   constructor(options) {
     super(options);
