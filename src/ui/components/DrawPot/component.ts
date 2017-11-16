@@ -7,4 +7,8 @@ export default class DrawPot extends Component {
     this.drawDone = true;
     this.args.drawAction();
   }
+
+  get number(): number {
+    return this.args.index + 1;
+  }
 }

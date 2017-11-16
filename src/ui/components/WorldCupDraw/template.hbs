@@ -5,6 +5,7 @@
     {{#each pots key="@index" as |teams index|}}
       <div class="pot-item">
         <DrawPot
+          @index={{index}}
           @teams={{teams}}
           @drawAction={{action drawPot index}}
         />
