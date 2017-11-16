@@ -27,14 +27,14 @@ function availableGroupsForTeam(team: Team, potIndex: number, groups: Team[][]):
     } else if (team.confederation === Confederation.UEFA) {
       return true;
     } else {
-      const conferedationsInGroup = group.map(t => t.confederation);
+      const conferedationsInGroup = group.map((t) => t.confederation);
       return conferedationsInGroup.indexOf(team.confederation) === -1;
     }
   });
 }
 
 function lastResortGroupsForTeam(team: Team, potIndex: number, groups: Team[][]): Team[][] {
-  return groups.filter(g => g[potIndex] === undefined);
+  return groups.filter((g) => g[potIndex] === undefined);
 }
 
 export function getHostTeam(): Team {
@@ -87,10 +87,10 @@ export function getTeamsInPots(): Team[][] {
 
 export function drawPot(potIndex: number, pot: Team[], groups: Team[][]): Team[][] {
   const modifiedGroups = [...groups];
-  let availableTeams = pot.filter(t => !t.drawn);
+  let availableTeams = pot.filter((t) => !t.drawn);
   availableTeams = availableTeams.sort(sortTeamsByConfederation);
 
-  availableTeams.forEach(team => {
+  availableTeams.forEach((team) => {
     let availableGroups = availableGroupsForTeam(team, potIndex, modifiedGroups);
     if (availableGroups.length === 0) {
       availableGroups = lastResortGroupsForTeam(team, potIndex, modifiedGroups);
