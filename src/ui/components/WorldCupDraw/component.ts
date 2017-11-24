@@ -14,12 +14,12 @@ const TEAM_TO_HIGHLIGHT: string = 'Uruguay';
 
 export default class WorldCupDraw extends Component {
   public pots: Pot[] = getTeamsInPots();
-  @tracked public groups: Group[] = Array.from(Array(8), (_) => Array(4));
-  @tracked public nextPotToDraw: number = 0;
+  @tracked public groups: Group[];
+  @tracked public nextPotToDraw: number;
 
   constructor(options) {
     super(options);
-    this.groups[0][0] = getHostTeam();
+    this.resetDraw();
   }
 
   public drawPot(potIndex): void {
@@ -30,6 +30,12 @@ export default class WorldCupDraw extends Component {
     this.groups = groups.map((g) => g.slice());
 
     this.nextPotToDraw++;
+  }
+
+  public resetDraw(): void {
+    this.groups = Array.from(Array(8), (_) => Array(4));
+    this.groups[0][0] = getHostTeam();
+    this.nextPotToDraw = 0;
   }
 
   @tracked('groups')
