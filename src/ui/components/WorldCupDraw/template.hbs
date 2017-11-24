@@ -8,6 +8,7 @@
           @index={{index}}
           @teams={{teams}}
           @drawAction={{action drawPot index}}
+          @drawButtonEnabled={{render-if-equals true nextPotToDraw index}}
         />
       </div>
     {{/each}}
